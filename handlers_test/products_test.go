@@ -26,7 +26,7 @@ func TestCreateProduct(t *testing.T) {
 	productJSON, _ := json.Marshal(product)
 
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodPost, "/products", bytes.NewReader(productJSON))
+	req := httptest.NewRequest(http.MethodPost, "/api/products", bytes.NewReader(productJSON))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
@@ -51,7 +51,7 @@ func TestGetProducts(t *testing.T) {
 	mockRepo.Create(product)
 
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodGet, "/products", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/products", nil)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 
@@ -76,7 +76,7 @@ func TestGetProduct(t *testing.T) {
 	mockRepo.Create(product)
 
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodGet, "/products/:id", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/products/:id", nil)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 	c.SetParamNames("id")
@@ -104,7 +104,7 @@ func TestUpdateProduct(t *testing.T) {
 	updatedProductJSON, _ := json.Marshal(updatedProduct)
 
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodPut, "/products/:id", bytes.NewReader(updatedProductJSON))
+	req := httptest.NewRequest(http.MethodPut, "/api/products/:id", bytes.NewReader(updatedProductJSON))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
@@ -131,7 +131,7 @@ func TestDeleteProduct(t *testing.T) {
 	mockRepo.Create(product)
 
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodDelete, "/products/:id", nil)
+	req := httptest.NewRequest(http.MethodDelete, "/api/products/:id", nil)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 	c.SetParamNames("id")

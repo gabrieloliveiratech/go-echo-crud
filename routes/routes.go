@@ -13,9 +13,9 @@ func InitRoutes(e *echo.Echo) {
 	productService := services.NewProductService(productRepo)
 	productHandler := handlers.NewProductHandler(productService)
 
-	e.POST("/products", productHandler.CreateProduct)
-	e.GET("/products", productHandler.GetProducts)
-	e.GET("/products/:id", productHandler.GetProduct)
-	e.PUT("/products/:id", productHandler.UpdateProduct)
-	e.DELETE("/products/:id", productHandler.DeleteProduct)
+	e.POST("/api/products", productHandler.CreateProduct)
+	e.GET("/api/products", productHandler.GetProducts)
+	e.GET("/api/products/:id", productHandler.GetProduct)
+	e.PUT("/api/products/:id", productHandler.UpdateProduct)
+	e.DELETE("/api/products/:id", productHandler.DeleteProduct)
 }
