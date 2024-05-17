@@ -1,0 +1,151 @@
+basePath: /api
+definitions:
+  models.Product:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+      stock:
+        type: integer
+      updated_at:
+        type: string
+    required:
+    - name
+    - price
+    - stock
+    type: object
+  models.ProductUpdate:
+    properties:
+      name:
+        type: string
+      price:
+        type: number
+      stock:
+        type: integer
+    type: object
+host: localhost
+info:
+  contact:
+    email: gabrielrbg8@gmail.com
+    name: API Support
+    url: https://github.com/gabrieloliveiratech
+  description: This is a sample Products CRUD.
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Products CRUD API
+  version: "1.0"
+paths:
+  /products:
+    get:
+      description: Get a list of all products
+      operationId: get-products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+      summary: Get all products
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: Create a new product with the given body
+      operationId: create-product
+      parameters:
+      - description: Product body
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Create a new product
+      tags:
+      - Products
+  /products/{id}:
+    delete:
+      description: Delete a product with the given ID
+      operationId: delete-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Delete a product
+      tags:
+      - Products
+    get:
+      description: Get a product with the given ID
+      operationId: get-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Get a product
+      tags:
+      - Products
+    put:
+      consumes:
+      - application/json
+      description: Update a product with the given ID and body
+      operationId: update-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Product body
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Update a product
+      tags:
+      - Products
+swagger: "2.0"
